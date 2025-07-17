@@ -1,13 +1,15 @@
-name: Restricted branch check
-
+name: Restricted Branch Check
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, reopened, synchronize]
-
 jobs:
-  restricted_branch_check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check if target branch is restricted
-        uses: udkyo/build-tools/.github/workflows/restricted-branch-check@main
-
+  run-check:
+    uses: udkyo/build-tools/.github/workflows/restricted-branch-check.yml@gha-restriction-checker
+    with:
+      head_ref: ${{ github.event.pull_request.head.ref }}
+      head_repo: ${{ github.event.pull_request.head.repo.full_name }}
+      pr_number: ${{ github.event.pull_request.number }}
+    secrets:
+      JIRA_URL: ${{ secrets.JIRA_URL }}
+      JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
