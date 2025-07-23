@@ -1,12 +1,13 @@
 name: Restricted Branch Check
+
 on:
   pull_request_target:
     types: [opened, reopened, synchronize]
+
 jobs:
   run-check:
-    uses: udkyo/build-tools/.github/workflows/restricted-branch-check.yml@gha-restriction-checker
+    uses: udkyo/build-tools/.github/workflows/restricted-branch-check.yml@main
     with:
-      head_repo: ${{ github.event.pull_request.head.repo.full_name }}
       pr_number: ${{ github.event.pull_request.number }}
     secrets:
       JIRA_URL: ${{ secrets.JIRA_URL }}
