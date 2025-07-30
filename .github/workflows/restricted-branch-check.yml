@@ -6,7 +6,7 @@ on:
 
 jobs:
   run-check:
-    uses: udkyo/build-tools/.github/workflows/restricted-branch-check.yml@gha-restriction-checker
+    uses: couchbase/build-tools/.github/workflows/restricted-branch-check.yml@master
     with:
       pr_number: ${{ github.event.pull_request.number }}
       pr_title: ${{ github.event.pull_request.title }}
